@@ -9,6 +9,7 @@
 namespace JonnyW\PhantomJs;
 
 use JonnyW\PhantomJs\Exception\InvalidExecutableException;
+use Matheos\MicroMVC\AppConfig;
 
 /**
  * PHP PhantomJs
@@ -57,8 +58,9 @@ class Engine
      */
     public function __construct()
     {
-        $this->path    = 'bin/phantomjs';
-        $this->options = array();
+        $cfg           = AppConfig::getInstance()->config;
+        $this->path    = $cfg->Site->rootFolder . '/bin/phantomjs';
+        $this->options = [];
     }
 
     /**
@@ -86,7 +88,7 @@ class Engine
      * Set path.
      *
      * @access public
-     * @param  string                   $path
+     * @param  string $path
      * @return \JonnyW\PhantomJs\Client
      */
     public function setPath($path)
@@ -113,7 +115,7 @@ class Engine
      * Set PhantomJs run options.
      *
      * @access public
-     * @param  array                    $options
+     * @param  array $options
      * @return \JonnyW\PhantomJs\Client
      */
     public function setOptions(array $options)
@@ -131,14 +133,14 @@ class Engine
      */
     public function getOptions()
     {
-        return (array) $this->options;
+        return (array)$this->options;
     }
 
     /**
      * Add single PhantomJs run option.
      *
      * @access public
-     * @param  string                   $option
+     * @param  string $option
      * @return \JonnyW\PhantomJs\Client
      */
     public function addOption($option)
@@ -154,7 +156,7 @@ class Engine
      * Debug.
      *
      * @access public
-     * @param  boolean                  $doDebug
+     * @param  boolean $doDebug
      * @return \JonnyW\PhantomJs\Client
      */
     public function debug($doDebug)
@@ -168,7 +170,7 @@ class Engine
      * Log info.
      *
      * @access public
-     * @param  string                   $info
+     * @param  string $info
      * @return \JonnyW\PhantomJs\Client
      */
     public function log($info)
@@ -206,7 +208,7 @@ class Engine
      * Validate execuable file.
      *
      * @access private
-     * @param  string                                                 $file
+     * @param  string $file
      * @return boolean
      * @throws \JonnyW\PhantomJs\Exception\InvalidExecutableException
      */
